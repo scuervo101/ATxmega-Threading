@@ -8,4 +8,4 @@
  Fork is a function designed to create a thread. The user will call the fork function with a pointer to the process being created. The fork function will save the initial context of that process then return to that newly created process. Fork function also creates the new stack of each process.
  
  # PuTTY Setting:
- 
+ Serial, 128000 baud rate, 8 data bits, 1 stop bit, even parity, no flow control
