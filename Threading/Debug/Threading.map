@@ -40,6 +40,12 @@ Discarded input sections
  .bss           0x00000000        0x0 mainUI.o
  .data          0x00000000        0x0 repairContext.o
  .bss           0x00000000        0x0 repairContext.o
+ .text          0x00000000        0x0 rgbFlash.o
+ .data          0x00000000        0x0 rgbFlash.o
+ .bss           0x00000000        0x0 rgbFlash.o
+ .debug_line    0x00000000        0x0 rgbFlash.o
+ .debug_str     0x00000000      0x10a rgbFlash.o
+ .comment       0x00000000       0x31 rgbFlash.o
  .text          0x00000000        0x0 thread.o
  .data          0x00000000        0x0 thread.o
  .bss           0x00000000        0x0 thread.o
@@ -114,6 +120,7 @@ LOAD ledAnimation.o
 LOAD main.o
 LOAD mainUI.o
 LOAD repairContext.o
+LOAD rgbFlash.o
 LOAD thread.o
 START GROUP
 LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avrxmega7\libm.a

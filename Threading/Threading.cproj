@@ -162,6 +162,12 @@
     <Compile Include="repairContext.S">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="rgbFlash.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="rgbFlash.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="thread.c">
       <SubType>compile</SubType>
     </Compile>

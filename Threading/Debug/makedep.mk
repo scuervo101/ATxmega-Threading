@@ -16,5 +16,7 @@ mainUI.c
 
 repairContext.S
 
+rgbFlash.c
+
 thread.c
 

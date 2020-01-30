@@ -940,26 +940,26 @@ void IO_Init(void)
  49e:	df 93       	push	r29
  4a0:	cd b7       	in	r28, 0x3d	; 61
  4a2:	de b7       	in	r29, 0x3e	; 62
-	PORTA.DIRCLR = PIN7_bm + PIN6_bm + PIN5_bm + PIN4_bm + PIN3_bm + PIN2_bm + PIN1_bm + PIN0_bm; //dip switches
+	PORTA.DIRCLR = PIN7_bm | PIN6_bm | PIN5_bm | PIN4_bm | PIN3_bm | PIN2_bm | PIN1_bm | PIN0_bm; //dip switches
  4a4:	80 e0       	ldi	r24, 0x00	; 0
  4a6:	96 e0       	ldi	r25, 0x06	; 6
  4a8:	2f ef       	ldi	r18, 0xFF	; 255
  4aa:	fc 01       	movw	r30, r24
  4ac:	22 83       	std	Z+2, r18	; 0x02
-	PORTC.DIRSET = PIN7_bm + PIN6_bm + PIN5_bm + PIN4_bm + PIN3_bm + PIN2_bm + PIN1_bm + PIN0_bm; //leds
+	PORTC.DIRSET = PIN7_bm | PIN6_bm | PIN5_bm | PIN4_bm | PIN3_bm | PIN2_bm | PIN1_bm | PIN0_bm; //leds
  4ae:	80 e4       	ldi	r24, 0x40	; 64
  4b0:	96 e0       	ldi	r25, 0x06	; 6
  4b2:	2f ef       	ldi	r18, 0xFF	; 255
  4b4:	fc 01       	movw	r30, r24
  4b6:	21 83       	std	Z+1, r18	; 0x01
 	
-	PORTE.DIRCLR = PIN1_bm + PIN0_bm;
+	PORTE.DIRCLR = PIN1_bm | PIN0_bm;
  4b8:	80 e8       	ldi	r24, 0x80	; 128
  4ba:	96 e0       	ldi	r25, 0x06	; 6
  4bc:	23 e0       	ldi	r18, 0x03	; 3
  4be:	fc 01       	movw	r30, r24
  4c0:	22 83       	std	Z+2, r18	; 0x02
-	PORTF.DIRCLR = PIN3_bm + PIN2_bm;
+	PORTF.DIRCLR = PIN3_bm | PIN2_bm;
  4c2:	80 ea       	ldi	r24, 0xA0	; 160
  4c4:	96 e0       	ldi	r25, 0x06	; 6
  4c6:	2c e0       	ldi	r18, 0x0C	; 12
@@ -1298,8 +1298,6 @@ int main(void)
 	Init_Thread_Timer();
  6b4:	0e 94 e1 04 	call	0x9c2	; 0x9c2 <Init_Thread_Timer>
 	
-	//tasks[0]->data[0] = 0x01;
-	
 	Thread_Table = (uint16_t)tasks;
  6b8:	8d e6       	ldi	r24, 0x6D	; 109
  6ba:	90 e2       	ldi	r25, 0x20	; 32
@@ -1309,8 +1307,6 @@ int main(void)
  6c4:	10 92 c3 20 	sts	0x20C3, r1	; 0x8020c3 <queue>
 	maxQueue = 0x00;
  6c8:	10 92 c6 20 	sts	0x20C6, r1	; 0x8020c6 <maxQueue>
-	
-	//some_Random_Function(5);
 	
 	Fork(Main_UI);
  6cc:	8f e2       	ldi	r24, 0x2F	; 47
@@ -1358,13 +1354,13 @@ void Usart_Init(void)
  700:	20 e1       	ldi	r18, 0x10	; 16
  702:	fc 01       	movw	r30, r24
  704:	23 83       	std	Z+3, r18	; 0x03
-	USARTD0.CTRLB = USART_RXEN_bm + USART_TXEN_bm;
+	USARTD0.CTRLB = USART_RXEN_bm | USART_TXEN_bm;
  706:	80 ea       	ldi	r24, 0xA0	; 160
  708:	99 e0       	ldi	r25, 0x09	; 9
  70a:	28 e1       	ldi	r18, 0x18	; 24
  70c:	fc 01       	movw	r30, r24
  70e:	24 83       	std	Z+4, r18	; 0x04
-	USARTD0.CTRLC = USART_CMODE_ASYNCHRONOUS_gc + USART_PMODE_EVEN_gc + USART_CHSIZE_8BIT_gc;
+	USARTD0.CTRLC = USART_CMODE_ASYNCHRONOUS_gc | USART_PMODE_EVEN_gc | USART_CHSIZE_8BIT_gc;
  710:	80 ea       	ldi	r24, 0xA0	; 160
  712:	99 e0       	ldi	r25, 0x09	; 9
  714:	23 e2       	ldi	r18, 0x23	; 35
@@ -1377,7 +1373,7 @@ void Usart_Init(void)
  71e:	25 e7       	ldi	r18, 0x75	; 117
  720:	fc 01       	movw	r30, r24
  722:	26 83       	std	Z+6, r18	; 0x06
-	USARTD0.BAUDCTRLB = (BSCALE << 4) + (BSEL >> 8);
+	USARTD0.BAUDCTRLB = (BSCALE << 4) | (BSEL >> 8);
  724:	80 ea       	ldi	r24, 0xA0	; 160
  726:	99 e0       	ldi	r25, 0x09	; 9
  728:	20 ed       	ldi	r18, 0xD0	; 208
@@ -2164,7 +2160,7 @@ ISR(TCF1_OVF_vect)
  c3a:	fc 01       	movw	r30, r24
  c3c:	10 82       	st	Z, r1
 	
-	uint16_t location = Thread_Table + ((maxQueue-1)*thread_Size);
+	uint16_t location = Thread_Table | ((maxQueue-1)*thread_Size);
  c3e:	80 91 c6 20 	lds	r24, 0x20C6	; 0x8020c6 <maxQueue>
  c42:	88 2f       	mov	r24, r24
  c44:	90 e0       	ldi	r25, 0x00	; 0
@@ -2177,8 +2173,8 @@ ISR(TCF1_OVF_vect)
  c52:	11 24       	eor	r1, r1
  c54:	80 91 c4 20 	lds	r24, 0x20C4	; 0x8020c4 <Thread_Table>
  c58:	90 91 c5 20 	lds	r25, 0x20C5	; 0x8020c5 <Thread_Table+0x1>
- c5c:	82 0f       	add	r24, r18
- c5e:	93 1f       	adc	r25, r19
+ c5c:	82 2b       	or	r24, r18
+ c5e:	93 2b       	or	r25, r19
  c60:	89 83       	std	Y+1, r24	; 0x01
  c62:	9a 83       	std	Y+2, r25	; 0x02
 	

@@ -12,11 +12,11 @@ uint8_t animation[20];
 
 void IO_Init(void)
 {
-	PORTA.DIRCLR = PIN7_bm + PIN6_bm + PIN5_bm + PIN4_bm + PIN3_bm + PIN2_bm + PIN1_bm + PIN0_bm; //dip switches
-	PORTC.DIRSET = PIN7_bm + PIN6_bm + PIN5_bm + PIN4_bm + PIN3_bm + PIN2_bm + PIN1_bm + PIN0_bm; //leds
+	PORTA.DIRCLR = PIN7_bm | PIN6_bm | PIN5_bm | PIN4_bm | PIN3_bm | PIN2_bm | PIN1_bm | PIN0_bm; //dip switches
+	PORTC.DIRSET = PIN7_bm | PIN6_bm | PIN5_bm | PIN4_bm | PIN3_bm | PIN2_bm | PIN1_bm | PIN0_bm; //leds
 	
-	PORTE.DIRCLR = PIN1_bm + PIN0_bm;
-	PORTF.DIRCLR = PIN3_bm + PIN2_bm;
+	PORTE.DIRCLR = PIN1_bm | PIN0_bm;
+	PORTF.DIRCLR = PIN3_bm | PIN2_bm;
 }
 
 void TC_Init(void)

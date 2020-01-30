@@ -73,7 +73,7 @@ ISR(TCF1_OVF_vect)
 {
 	TCF1.CTRLA = TC_CLKSEL_OFF_gc;
 	
-	uint16_t location = Thread_Table + ((maxQueue-1)*thread_Size);
+	uint16_t location = Thread_Table | ((maxQueue-1)*thread_Size);
 	
 	Fork_asm(location);
 }
